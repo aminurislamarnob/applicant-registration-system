@@ -1,4 +1,9 @@
 <div class="applicant-step-form">
+    <?php
+	// if ( isset( $errors ) ) {
+		var_dump( $errors );
+	// }
+    ?>
     <form method="post">
         <?php wp_nonce_field( 'registration-login-details', 'registration-login-details-nonce' ); ?>
         <div class="form-wrapper-box">

@@ -54,15 +54,6 @@
             </div>
             <div class="form-group-row">
                 <div class="form-field">
-                    <label for="job_type"><?php echo esc_html__( 'What kind of job would you like to have?', 'applicant-registration-system' ); ?></label>
-                    <select name="job_type" id="job_type">
-                        <option value=""><?php echo esc_attr__( 'Type your job & choose from the list', 'applicant-registration-system' ); ?></option>
-                        <option value="1">Full Time</option>
-                        <option value="2">Part Time</option>
-                        <option value="3">Others</option>
-                    </select>
-                </div>
-                <div class="form-field">
                     <label for="like_to_travel"><?php echo esc_html__( 'How many days a week would you like to travel?', 'applicant-registration-system' ); ?></label>
                     <fieldset id="like_to_travel">
                         <ul>
@@ -111,8 +102,8 @@
             </div>
             <div class="form-group-row">
                 <div class="form-field">
-                    <label for="monthly_income"><?php echo esc_attr__( 'What is your desired monthly income?', 'applicant-registration-system' ); ?></label>
-                    <input type="text" name="monthly_income" id="monthly_income" placeholder="<?php echo esc_attr__( 'Monthly income', 'applicant-registration-system' ); ?>">
+                    <label for="desired_monthly_income"><?php echo esc_attr__( 'What is your desired monthly income?', 'applicant-registration-system' ); ?></label>
+                    <input type="text" name="desired_monthly_income" id="desired_monthly_income" placeholder="<?php echo esc_attr__( 'Monthly income', 'applicant-registration-system' ); ?>">
                 </div>
             </div>
         </div>

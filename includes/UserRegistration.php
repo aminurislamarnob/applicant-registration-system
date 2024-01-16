@@ -45,16 +45,19 @@ class UserRegistration {
         if ( isset( $_POST['registration-login-details-nonce'] ) && wp_verify_nonce( $_POST['registration-login-details-nonce'], 'registration-login-details' ) ) { // phpcs:ignore
             $user_email = sanitize_email( $_POST['user_email'] ); // phpcs:ignore
             $user_password = sanitize_text_field( $_POST['user_password'] ); // phpcs:ignore
+            $errors = [];
 
             // Validate email
             if ( ! is_email( $user_email ) ) {
-                echo '<div class="error">Invalid email address.</div>';
+                // echo '<div class="error">Invalid email address.</div>';
+                $errors['user_email'] = esc_html__( 'Invalid email address.', 'applicant-registration-system' );
                 return;
             }
 
             // Validate password length
             if ( strlen( $user_password ) < 8 ) {
-                echo '<div class="error">Password must be at least 8 characters long.</div>';
+                // echo '<div class="error">Password must be at least 8 characters long.</div>';
+                $errors['user_email'] = esc_html__( 'Password must be at least 8 characters long.', 'applicant-registration-system' );
                 return;
             }
 
@@ -72,7 +75,8 @@ class UserRegistration {
                 // Registration failed, handle errors
                 $error_message = $user_id->get_error_message();
                 // Display the error message
-                echo '<div class="error">' . esc_html( $error_message ) . '</div>';
+                // echo '<div class="error">' . esc_html( $error_message ) . '</div>';
+                $errors['error_message'] = esc_html( $error_message );
             }
         }
     }
@@ -118,5 +122,34 @@ class UserRegistration {
     }
 
     public function handle_registration_step_three() {
+        global $wp;
+        if ( isset( $_POST['registration-requirement-nonce'] ) && wp_verify_nonce( $_POST['registration-requirement-nonce'], 'registration-requirement' ) ) { // phpcs:ignore
+
+            // phpcs:disable
+            $job_type = sanitize_text_field( $_POST['job_type'] );
+            $willing_to_travel = sanitize_text_field( $_POST['willing_to_travel'] );
+            $like_to_travel = sanitize_text_field( $_POST['like_to_travel'] );
+            $minimum_hours = sanitize_text_field( $_POST['minimum_hours'] );
+            $maximum_hours = sanitize_text_field( $_POST['maximum_hours'] );
+            $hours_like_to_work = [
+                'minimum_hours' => $minimum_hours,
+                'maximum_hours' => $maximum_hours,
+            ];
+            $desired_monthly_income = sanitize_text_field( $_POST['desired_monthly_income'] );
+            // phpcs:enable
+
+            //save as user meta
+            $current_user_id = get_current_user_id();
+            update_user_meta( $current_user_id, 'job_type', $job_type );
+            update_user_meta( $current_user_id, 'willing_to_travel', $willing_to_travel );
+            update_user_meta( $current_user_id, 'like_to_travel', $like_to_travel );
+            update_user_meta( $current_user_id, 'hours_like_to_work', $hours_like_to_work );
+            update_user_meta( $current_user_id, 'desired_monthly_income', $desired_monthly_income );
+
+            //redirect next step
+            $current_url = home_url( $wp->request );
+            wp_safe_redirect( $current_url . '?step=work-experience' );
+            exit;
+        }
     }
 }
