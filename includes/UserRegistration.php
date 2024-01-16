@@ -24,6 +24,8 @@ class UserRegistration {
 			require APPLICANT_REGISTRATION_SYSTEM_TEMPLATE_DIR . '/user/step-form-two.php';
 		} elseif ( 'your-job-requirement' === $_GET['step'] ) {
 			require APPLICANT_REGISTRATION_SYSTEM_TEMPLATE_DIR . '/user/step-form-three.php';
+		} elseif ( 'work-experience' === $_GET['step'] ) {
+			require APPLICANT_REGISTRATION_SYSTEM_TEMPLATE_DIR . '/user/step-form-four.php';
 		}
         $string = ob_get_clean();
         return $string;
@@ -37,6 +39,8 @@ class UserRegistration {
             $this->handle_registration_step_two();
         } elseif ( 'your-job-requirement' === $_GET['step'] ) {
             $this->handle_registration_step_three();
+        } elseif ( 'work-experience' === $_GET['step'] ) {
+            $this->handle_registration_step_four();
         }
     }
 
@@ -149,6 +153,51 @@ class UserRegistration {
             //redirect next step
             $current_url = home_url( $wp->request );
             wp_safe_redirect( $current_url . '?step=work-experience' );
+            exit;
+        }
+    }
+
+    public function handle_registration_step_four() {
+        global $wp;
+        if ( isset( $_POST['work-experience-nonce'] ) && wp_verify_nonce( $_POST['work-experience-nonce'], 'work-experience' ) ) { // phpcs:ignore
+
+            // phpcs:disable
+            $company = sanitize_text_field( $_POST['company'] );
+            $department = sanitize_text_field( $_POST['department'] );
+            $designation = sanitize_text_field( $_POST['designation'] );
+            $work_period_min = sanitize_text_field( $_POST['work_period_min'] );
+            $work_period_max = sanitize_text_field( $_POST['work_period_max'] );
+            $work_experience = [
+                'company' => $company,
+                'department' => $department,
+                'designation' => $designation,
+                'work_period_min' => $work_period_min,
+                'work_period_max' => $work_period_max,
+            ];
+            $facebook = sanitize_text_field( $_POST['facebook'] );
+            $linkedin = sanitize_text_field( $_POST['linkedin'] );
+            $instagram = sanitize_text_field( $_POST['instagram'] );
+            $twitter = sanitize_text_field( $_POST['twitter'] );
+            // phpcs:enable
+
+            //save as user meta
+            $current_user_id = get_current_user_id();
+            update_user_meta( $current_user_id, 'work_experience', $work_experience );
+            update_user_meta( $current_user_id, 'facebook', $facebook );
+            update_user_meta( $current_user_id, 'linkedin', $linkedin );
+            update_user_meta( $current_user_id, 'instagram', $instagram );
+            update_user_meta( $current_user_id, 'twitter', $twitter );
+
+            if ( isset( $_FILES['resume'] ) ) {
+                $upload = wp_upload_bits( $_FILES['resume']['name'], null, file_get_contents( $_FILES['resume']['tmp_name'] ) );
+                if ( $upload ) {
+                    update_user_meta( $current_user_id, 'resume', $upload );
+                }
+            }
+
+            //redirect next step
+            $current_url = home_url( $wp->request );
+            wp_safe_redirect( $current_url . '?step=check-and-send' );
             exit;
         }
     }
