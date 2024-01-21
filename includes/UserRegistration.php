@@ -26,6 +26,8 @@ class UserRegistration {
 			require APPLICANT_REGISTRATION_SYSTEM_TEMPLATE_DIR . '/user/step-form-three.php';
 		} elseif ( 'work-experience' === $_GET['step'] ) {
 			require APPLICANT_REGISTRATION_SYSTEM_TEMPLATE_DIR . '/user/step-form-four.php';
+		} elseif ( 'check-and-send' === $_GET['step'] ) {
+			require APPLICANT_REGISTRATION_SYSTEM_TEMPLATE_DIR . '/user/check-and-send.php';
 		}
         $string = ob_get_clean();
         return $string;
@@ -188,7 +190,7 @@ class UserRegistration {
             update_user_meta( $current_user_id, 'instagram', $instagram );
             update_user_meta( $current_user_id, 'twitter', $twitter );
 
-            if ( isset( $_FILES['resume'] ) ) {
+            if ( isset( $_FILES['resume'] ) && ! empty( $_FILES['resume']['tmp_name'] ) ) {
                 $upload = wp_upload_bits( $_FILES['resume']['name'], null, file_get_contents( $_FILES['resume']['tmp_name'] ) );
                 if ( $upload ) {
                     update_user_meta( $current_user_id, 'resume', $upload );
