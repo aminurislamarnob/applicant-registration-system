@@ -1,0 +1,10 @@
+.error-message {
+    color: #e83e3a;
+}
+
+.form-control.error {
+    border-bottom-color: #e83e3a!important;
+}
+.login-main-wrapper .login-form-wrap .form-group .form-control {
+    border-radius: 0px;
+}

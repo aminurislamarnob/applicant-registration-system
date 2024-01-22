@@ -38,7 +38,7 @@ class Assets {
         $frontend_script    = APPLICANT_REGISTRATION_SYSTEM_PLUGIN_ASSET . '/frontend/script.js';
 
         wp_register_script( 'applicant_registration_system_admin_script', $admin_script, [], filemtime( APPLICANT_REGISTRATION_SYSTEM_DIR . '/assets/admin/script.js' ), true );
-        wp_register_script( 'applicant_registration_system_script', $frontend_script, [], filemtime( APPLICANT_REGISTRATION_SYSTEM_DIR . '/assets/frontend/script.js' ), true );
+        wp_register_script( 'applicant_registration_system_script', $frontend_script, [ 'jquery' ], filemtime( APPLICANT_REGISTRATION_SYSTEM_DIR . '/assets/frontend/script.js' ), true );
     }
 
     /**
@@ -72,9 +72,12 @@ class Assets {
      * @return void
      */
     public function enqueue_front_scripts() {
+        wp_enqueue_style( 'applicant_registration_system_style' );
         wp_enqueue_script( 'applicant_registration_system_script' );
         wp_localize_script(
-            'applicant_registration_system_script', 'Applicant_Registration_System', []
+            'applicant_registration_system_script', 'ajax_data', [
+                'ajaxurl' => admin_url( 'admin-ajax.php' ),
+            ]
         );
     }
 }
