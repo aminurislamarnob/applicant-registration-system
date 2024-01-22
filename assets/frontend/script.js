@@ -95,7 +95,7 @@ $(document).ready( function() {
     });
 
     /***
-     * Step thredd
+     * Step three
      * **/
     $("#job_req_submit").click( function(e) {
         e.preventDefault();
@@ -104,7 +104,7 @@ $(document).ready( function() {
         var submitted_data = {
             'action': 'bex_user_job_requirments',
             'nonce': $('input[name="nonce"]').val(),
-            'job_type': $('input[name="job_type"]').val(),
+            'job_type': $('select[name="job_type"]').find(":selected").val(),
             'like_to_travel': $('input[name="like_to_travel"]').val(),
             'desired_monthly_income': $('input[name="desired_monthly_income"]').val(),
             'willing_to_travel': $('input[name="willing_to_travel"]').val(),
@@ -132,6 +132,38 @@ $(document).ready( function() {
            }
         })
     });
+
+
+    /***
+     * Step four
+     * **/
+    $("#work-exp-form").on('submit',(function(e) {
+        e.preventDefault();
+        var file = $("[name=resume]").file;
+        console.log(file);
+  
+        // $.ajax({
+        //    type : "post",
+        //    dataType : "json",
+        //    url : ajax_data.ajaxurl,
+        //    data : new FormData($(this)[0]),
+        //    success: function(response) {
+        //     console.log(response);
+        //     //  if(response.type == "error") {
+        //     //      // Clear existing error messages
+        //     //      clearErrorMessages();
+ 
+        //     //      // Loop through the error messages
+        //     //      $.each(response.errors, function(fieldName, errorMessage) {
+        //     //          displayError(fieldName, errorMessage);
+        //     //      });
+        //     //  }else if(response.type == "success"){
+        //     //     window.location.href = window.location.href.split('?')[0] + '?step=work-experience';
+        //     //  }
+        //    }
+        // })
+    }));
+
  });
 
 })(jQuery);

@@ -21,9 +21,13 @@ class UserRegistration {
         add_action( 'wp_ajax_bex_user_personal_info', [ $this, 'handle_bex_user_personal_info' ] );
         add_action( 'wp_ajax_nopriv_bex_user_personal_info', [ $this, 'handle_bex_user_personal_info' ] );
 
-        //Handle form submission step two
+        //Handle form submission step three
         add_action( 'wp_ajax_bex_user_job_requirments', [ $this, 'handle_bex_user_job_requirments' ] );
         add_action( 'wp_ajax_nopriv_bex_user_job_requirments', [ $this, 'handle_bex_user_job_requirments' ] );
+
+        //Handle form submission step three
+        add_action( 'wp_ajax_bex_work_exp', [ $this, 'handle_bex_work_exp' ] );
+        add_action( 'wp_ajax_nopriv_bex_work_exp', [ $this, 'handle_bex_work_exp' ] );
 	}
 
     /**
@@ -235,6 +239,10 @@ class UserRegistration {
             ];
             wp_send_json( $response );
         }
+    }
+
+    public function handle_bex_work_exp() {
+        dd( $_POST );
     }
 
 	public function wp_job_manager_applicant_registration() {

@@ -1,8 +1,8 @@
 <!--login details start-->
 <div class="login-main-wrapper">
     <div class="login-container">
-            <form method="post" class="login-from" enctype="multipart/form-data">
-                <?php wp_nonce_field( 'work-experience', 'work-experience-nonce' ); ?>
+            <form id="work-exp-form" method="post" class="login-from" enctype="multipart/form-data">
+                
                 <div class="form-submit form-later">
                     <button class="btn-submit btn-later"><?php echo esc_html__( 'Do it later', 'applicant-registration-system' ); ?></button>  
                 </div>
@@ -93,6 +93,8 @@
                                 </span>
                             </label>
                         </div>
+                        <input type="hidden" name="nonce" value="<?php echo wp_create_nonce( 'bex_work_exp_nonce' ); ?>">
+                        <input type="hidden" name="action" value="bex_work_exp">
                         <div class="resume-updated">
                             <p><?php echo esc_html__( 'Resume.pdf', 'applicant-registration-system' ); ?> <span><?php echo esc_html__( '1.2MB', 'applicant-registration-system' ); ?></span></p>
                             <div class="resume-delete">
