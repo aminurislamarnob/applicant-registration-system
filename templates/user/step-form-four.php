@@ -6,7 +6,7 @@
                 <button class="btn-submit btn-later"><?php echo esc_html__( 'Do it later', 'applicant-registration-system' ); ?></button>  
             </div>
             <div class="login-form-wrap login-form-wrap-second">
-                <div class="login-header">
+                <div class="login-header login-header-with-btn">
                     <div class="header-title">
                         <h4><?php echo esc_html__( 'Work Experience', 'applicant-registration-system' ); ?></h4>
                         <p><?php echo esc_html__( 'Enter your work experience if you have any.', 'applicant-registration-system' ); ?></p>
@@ -22,7 +22,6 @@
                 <div class="repeater">
                     <div data-repeater-list="experience">
                         <div data-repeater-item>
-                            <button data-repeater-delete type="button"><img src="<?php echo get_theme_file_uri(); ?>/assets/images/icons/trash.svg" alt=""><?php echo esc_html__( 'Remove', 'applicant-registration-system' ); ?></button>
                             <div class="experience-fields">
                                 <div class="login-from">
                                     <div class="personal-info">
@@ -53,6 +52,9 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-submit">
+                                <button data-repeater-delete type="button" class="btn-submit"><?php echo esc_html__( 'Remove', 'applicant-registration-system' ); ?></button>
+                            </div> 
                         </div>
                     </div>
                 </div>
