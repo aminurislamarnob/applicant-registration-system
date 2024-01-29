@@ -593,12 +593,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHPCSUtils.git",
-                "reference": "38de05ce73de8e9ec1e4cad49c1e2a9e69c4a25b"
+                "reference": "26dcb893d86fbe90ab2a8abd7b08a3fda3602237"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSUtils/zipball/38de05ce73de8e9ec1e4cad49c1e2a9e69c4a25b",
-                "reference": "38de05ce73de8e9ec1e4cad49c1e2a9e69c4a25b",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSUtils/zipball/26dcb893d86fbe90ab2a8abd7b08a3fda3602237",
+                "reference": "26dcb893d86fbe90ab2a8abd7b08a3fda3602237",
                 "shasum": ""
             },
             "require": {
@@ -674,7 +674,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2024-01-12T04:03:57+00:00"
+            "time": "2024-01-15T05:03:54+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -980,12 +980,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "6e4b36c372874f095696bb14edc5bb027d2b2676"
+                "reference": "cc5ba9670c526132611e861731f855cfcb93fb0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6e4b36c372874f095696bb14edc5bb027d2b2676",
-                "reference": "6e4b36c372874f095696bb14edc5bb027d2b2676",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/cc5ba9670c526132611e861731f855cfcb93fb0c",
+                "reference": "cc5ba9670c526132611e861731f855cfcb93fb0c",
                 "shasum": ""
             },
             "require": {
@@ -1070,7 +1070,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-01-12T14:14:42+00:00"
+            "time": "2024-01-27T09:41:12+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -1807,12 +1807,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHP_CodeSniffer.git",
-                "reference": "074ad2a81e2314905b6dfd89ccb6fd863029f769"
+                "reference": "50a564597f0e83ebac0f02a6e5fbcccf7ef4d3e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/074ad2a81e2314905b6dfd89ccb6fd863029f769",
-                "reference": "074ad2a81e2314905b6dfd89ccb6fd863029f769",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/50a564597f0e83ebac0f02a6e5fbcccf7ef4d3e2",
+                "reference": "50a564597f0e83ebac0f02a6e5fbcccf7ef4d3e2",
                 "shasum": ""
             },
             "require": {
@@ -1880,7 +1880,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2024-01-14T07:07:51+00:00"
+            "time": "2024-01-28T03:46:32+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -2040,12 +2040,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "68d6573ec98715ddcae5a0a85bee3c1c27a4c33f"
+                "reference": "0435a08f69125535336177c29d56af3abc1f69da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/68d6573ec98715ddcae5a0a85bee3c1c27a4c33f",
-                "reference": "68d6573ec98715ddcae5a0a85bee3c1c27a4c33f",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/0435a08f69125535336177c29d56af3abc1f69da",
+                "reference": "0435a08f69125535336177c29d56af3abc1f69da",
                 "shasum": ""
             },
             "require": {
@@ -2117,7 +2117,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-12-28T19:16:56+00:00"
+            "time": "2024-01-23T14:53:30+00:00"
         },
         {
             "name": "tareq1988/wp-php-cs-fixer",

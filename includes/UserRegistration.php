@@ -25,7 +25,7 @@ class UserRegistration {
         add_action( 'wp_ajax_bex_user_job_requirments', [ $this, 'handle_bex_user_job_requirments' ] );
         add_action( 'wp_ajax_nopriv_bex_user_job_requirments', [ $this, 'handle_bex_user_job_requirments' ] );
 
-        //Handle form submission step three
+        //Handle form submission step four
         add_action( 'wp_ajax_bex_work_exp', [ $this, 'handle_bex_work_exp' ] );
         add_action( 'wp_ajax_nopriv_bex_work_exp', [ $this, 'handle_bex_work_exp' ] );
 	}
@@ -311,7 +311,7 @@ class UserRegistration {
 
     public function handle_registration_step_four() {
         global $wp;
-        if ( isset( $_POST['work-experience-nonce'] ) && wp_verify_nonce( $_POST['work-experience-nonce'], 'work-experience' ) ) { // phpcs:ignore
+        if ( isset( $_POST['bex_work_exp_nonce'] ) && wp_verify_nonce( $_POST['bex_work_exp_nonce'], 'work-experience' ) ) { // phpcs:ignore
 
             // phpcs:disable
             $company = sanitize_text_field( $_POST['company'] );

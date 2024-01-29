@@ -36,9 +36,12 @@ class Assets {
     public function register_scripts() {
         $admin_script       = APPLICANT_REGISTRATION_SYSTEM_PLUGIN_ASSET . '/admin/script.js';
         $frontend_script    = APPLICANT_REGISTRATION_SYSTEM_PLUGIN_ASSET . '/frontend/script.js';
+        $jquery_repeater_script    = APPLICANT_REGISTRATION_SYSTEM_PLUGIN_ASSET . '/frontend/jquery.repeater.js';
 
-        wp_register_script( 'applicant_registration_system_admin_script', $admin_script, [], filemtime( APPLICANT_REGISTRATION_SYSTEM_DIR . '/assets/admin/script.js' ), true );
-        wp_register_script( 'applicant_registration_system_script', $frontend_script, [ 'jquery' ], filemtime( APPLICANT_REGISTRATION_SYSTEM_DIR . '/assets/frontend/script.js' ), true );
+        wp_register_script( 'applicant_registration_system_admin_script', $admin_script, [], APPLICANT_REGISTRATION_SYSTEM_PLUGIN_VERSION, true );
+        wp_register_script( 'jquery_repeater', $jquery_repeater_script, [ 'jquery' ], APPLICANT_REGISTRATION_SYSTEM_PLUGIN_VERSION, true );
+        wp_register_script( 'applicant_registration_system_script', $frontend_script, [ 'jquery', 'jquery_repeater' ], APPLICANT_REGISTRATION_SYSTEM_PLUGIN_VERSION, true );
+        wp_enqueue_media();
     }
 
     /**
@@ -74,6 +77,7 @@ class Assets {
     public function enqueue_front_scripts() {
         wp_enqueue_style( 'applicant_registration_system_style' );
         wp_enqueue_script( 'applicant_registration_system_script' );
+        wp_enqueue_script( 'jquery_repeater' );
         wp_localize_script(
             'applicant_registration_system_script', 'ajax_data', [
                 'ajaxurl' => admin_url( 'admin-ajax.php' ),

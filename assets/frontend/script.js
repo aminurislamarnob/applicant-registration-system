@@ -139,14 +139,37 @@ $(document).ready( function() {
      * **/
     $("#work-exp-form").on('submit',(function(e) {
         e.preventDefault();
-        var file = $("[name=resume]").file;
-        console.log(file);
+        
+        // Initialize an array to store the values
+        var experienceData = [];
+
+        // Iterate through each set of input fields
+        $("[data-repeater-item]").each(function(index) {
+            var company = $(this).find("[name='experience[" + index + "][company]']").val();
+            var department = $(this).find("[name='experience[" + index + "][department]']").val();
+            var designation = $(this).find("[name='experience[" + index + "][designation]']").val();
+            var workPeriodMin = $(this).find("[name='experience[" + index + "][work_period_min]']").val();
+            var workPeriodMax = $(this).find("[name='experience[" + index + "][work_period_max]']").val();
+
+            // Create an object with the values and push it to the array
+            var experience = {
+                company: company,
+                department: department,
+                designation: designation,
+                work_period_min: workPeriodMin,
+                work_period_max: workPeriodMax
+            };
+            experienceData.push(experience);
+        });
+
+        // Do something with the collected data
+        console.log(experienceData);
   
         // $.ajax({
         //    type : "post",
         //    dataType : "json",
         //    url : ajax_data.ajaxurl,
-        //    data : new FormData($(this)[0]),
+        //    data : formData,
         //    success: function(response) {
         //     console.log(response);
         //     //  if(response.type == "error") {
@@ -164,6 +187,119 @@ $(document).ready( function() {
         // })
     }));
 
+
+
+    /****
+     * Resume upload
+     * *****/
+    //add product image on validation time
+    // var product_thumbnail_url = $("#product_thumbnail_url").val();
+    // if( product_thumbnail_url ){
+    //     $('#product_thumb_img').html( '<img src="'+product_thumbnail_url+'" alt="Product Image"/>' );
+    //     $('#product-single-image').addClass('image-drop-bg');
+    // }
+
+    //remove resume
+    $('#remove-resume').click(function(event){
+        event.preventDefault();
+        $("#uploaded-resume").hide();
+        $('#resume_id').val('');
+    });
+
+    //Product Single Image or Media Upload
+    $('#upload-resume-file').click(function(event){
+        event.preventDefault();
+
+        var targetContainer = $(this);
+        
+        // If the media frame already exists, reopen it.
+        if ( frame ) {
+            frame.open();
+            return false;
+        }
+
+        // Create a new media frame
+        var frame = wp.media({
+            title: "Upload Your Resume",
+            button:{
+                text: "Upload"
+            },
+            multiple: false
+        });
+
+        frame.on('select', function(){
+            var attachment = frame.state().get('selection').first().toJSON();
+
+            //show uploaded file div
+            $("#uploaded-resume").show();
+            $('#uploaded-resume-title').html(`${attachment.filename} <span>${attachment.filesizeHumanReadable}</span>`);
+            
+            // Send the attachment id to our hidden input
+            $('#resume_id').val(attachment.id);
+
+            //add class to hide text normaly
+            $(targetContainer).addClass('image-drop-bg');
+        });
+
+        frame.open();
+    });
+    
+
+    //Handle drag and drop resume upload
+    // var dropArea = $('#upload-resume-file');
+
+    // // Initialize WordPress media uploader
+    // var mediaUploader = wp.media({
+    //     title: "Upload Your Resume",
+    //     button:{
+    //         text: "Upload"
+    //     },
+    //     multiple: true
+    // });
+
+    // // When files are dropped onto the drop area
+    // dropArea.on('dragover dragleave', function(event) {
+    //     event.preventDefault();
+    //     event.stopPropagation();
+    // });
+
+    // dropArea.on('drop', function(event) {
+    //     event.preventDefault();
+    //     event.stopPropagation();
+        
+    //     var files = event.originalEvent.dataTransfer.files;
+    //     // console.log(files);
+    //     if (files.length > 0) {
+    //         // console.log(mediaUploader.uploader.options.uploader);
+    //         // mediaUploader.uploader.options.uploader.files = files;
+    //         mediaUploader.open();
+    //         mediaUploader.state().get('selection').add(files[0]);
+    //     }
+    // });
+
+ });
+
+ $(document).ready(function () {
+     //Repeater js
+     $('.repeater').repeater({
+        isFirstItemUndeletable:true,
+        show: function () {
+            $(this).slideDown();
+            $(this).addClass('cloned-group');
+        },
+        hide: function (deleteElement) {
+            if(confirm('Are you sure you want to delete this element?')) {
+              $(this).slideUp(deleteElement);
+            }
+        },
+        
+     });
+
+     //social connect button
+     $('.btn-connect').on('click', function(e){
+        e.preventDefault();
+        $(this).closest('.form-group').find('input').toggleClass('d-none');
+     });
  });
 
 })(jQuery);

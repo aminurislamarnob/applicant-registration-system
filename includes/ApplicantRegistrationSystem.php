@@ -213,6 +213,7 @@ final class ApplicantRegistrationSystem {
     public function init_classes() {
         $this->container['scripts'] = new Assets();
         $this->container['user_registration'] = new UserRegistration();
+        $this->container['handle_resume_upload'] = new HandleMediaUploader();
     }
 
     /**
