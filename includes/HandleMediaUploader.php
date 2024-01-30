@@ -10,7 +10,24 @@ class HandleMediaUploader {
 		add_action( 'pre_get_posts', [ $this, 'user_view_own_attachments' ] );
 		add_action( 'init', [ $this, 'allow_subscriber_top_uploads_media' ] );
 		add_filter( 'upload_mimes', [ $this, 'subscriber_restrictMimeTypes_allow_pdf' ] );
+        add_filter( 'job_manager_job_listing_data_fields', [ $this, 'modify_job_manager_job_listing_data_fields' ] );
 	}
+
+    /**
+     * Remove Company Related Job Meta Fields
+     *
+     * @param [type] $fields
+     * @return void
+     */
+    public function modify_job_manager_job_listing_data_fields( $fields ) {
+        unset( $fields['_company_name'] );
+        unset( $fields['_company_website'] );
+        unset( $fields['_company_tagline'] );
+        unset( $fields['_company_twitter'] );
+        unset( $fields['_company_video'] );
+        unset( $fields['_remote_position'] );
+        return $fields;
+    }
 
     /**
      * Allow subscriber to upload pdf only
