@@ -97,7 +97,7 @@ $(document).ready( function() {
     /***
      * Step three
      * **/
-    $("#job_req_submit").click( function(e) {
+    $("#job-requirment-form").on('submit',(function(e) {
         e.preventDefault();
  
         //submitted data
@@ -108,8 +108,8 @@ $(document).ready( function() {
             'like_to_travel': $('input[name="like_to_travel"]').val(),
             'desired_monthly_income': $('input[name="desired_monthly_income"]').val(),
             'willing_to_travel': $('input[name="willing_to_travel"]').val(),
-            'minimum_hours': $('input[name="minimum_hours"]').val(),
-            'maximum_hours': $('input[name="maximum_hours"]').val(),
+            'minimum_hours_per_week': $('input[name="minimum_hours_per_week"]').val(),
+            'maximum_hours_per_week': $('input[name="maximum_hours_per_week"]').val(),
         }
   
         $.ajax({
@@ -131,7 +131,7 @@ $(document).ready( function() {
              }
            }
         })
-    });
+    }));
 
 
     /***
@@ -141,7 +141,7 @@ $(document).ready( function() {
         e.preventDefault();
         
         // Initialize an array to store the values
-        var experienceData = [];
+        var work_experiences = [];
 
         // Iterate through each set of input fields
         $("[data-repeater-item]").each(function(index) {
@@ -159,32 +159,43 @@ $(document).ready( function() {
                 work_period_min: workPeriodMin,
                 work_period_max: workPeriodMax
             };
-            experienceData.push(experience);
+            work_experiences.push(experience);
         });
 
         // Do something with the collected data
-        console.log(experienceData);
+        // console.log(work_experiences);
+
+        //submitted data
+        var submitted_data = {
+            'action': 'bex_work_exp',
+            'nonce': $('input[name="nonce"]').val(),
+            'work_experiences': work_experiences,
+            'facebook': $('input[name="facebook"]').val(),
+            'linkedin': $('input[name="linkedin"]').val(),
+            'instagram': $('input[name="instagram"]').val(),
+            'twitter': $('input[name="twitter"]').val(),
+            'resume': $('input[name="resume"]').val(),
+        }
   
-        // $.ajax({
-        //    type : "post",
-        //    dataType : "json",
-        //    url : ajax_data.ajaxurl,
-        //    data : formData,
-        //    success: function(response) {
-        //     console.log(response);
-        //     //  if(response.type == "error") {
-        //     //      // Clear existing error messages
-        //     //      clearErrorMessages();
+        $.ajax({
+           type : "post",
+           dataType : "json",
+           url : ajax_data.ajaxurl,
+           data : submitted_data,
+           success: function(response) {
+             if(response.type == "error") {
+                 // Clear existing error messages
+                 clearErrorMessages();
  
-        //     //      // Loop through the error messages
-        //     //      $.each(response.errors, function(fieldName, errorMessage) {
-        //     //          displayError(fieldName, errorMessage);
-        //     //      });
-        //     //  }else if(response.type == "success"){
-        //     //     window.location.href = window.location.href.split('?')[0] + '?step=work-experience';
-        //     //  }
-        //    }
-        // })
+                 // Loop through the error messages
+                 $.each(response.errors, function(fieldName, errorMessage) {
+                     displayError(fieldName, errorMessage);
+                 });
+             }else if(response.type == "success"){
+                window.location.href = window.location.href.split('?')[0] + '?step=check-and-send';
+             }
+           }
+        })
     }));
 
 

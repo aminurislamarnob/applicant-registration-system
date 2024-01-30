@@ -1,5 +1,5 @@
 <div class="login-main-wrapper">
-    <form method="post">
+    <form id="job-requirment-form" method="post">
         <?php wp_nonce_field( 'registration-requirement', 'registration-requirement-nonce' ); ?>
         <div class="login-container">
             <div class="login-form-wrap">

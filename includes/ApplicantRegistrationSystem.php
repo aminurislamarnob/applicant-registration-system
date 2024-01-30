@@ -214,6 +214,7 @@ final class ApplicantRegistrationSystem {
         $this->container['scripts'] = new Assets();
         $this->container['user_registration'] = new UserRegistration();
         $this->container['handle_resume_upload'] = new HandleMediaUploader();
+        $this->container['job_manager'] = new JobManager();
     }
 
     /**
