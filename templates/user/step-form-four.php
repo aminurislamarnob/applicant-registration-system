@@ -1,3 +1,12 @@
+<?php
+    $current_user_id = get_current_user_id();
+    $twitter = get_user_meta( $current_user_id, 'twitter', true );
+    $facebook = get_user_meta( $current_user_id, 'facebook', true );
+    $linkedin = get_user_meta( $current_user_id, 'linkedin', true );
+    $instagram = get_user_meta( $current_user_id, 'instagram', true );
+    $resume = get_user_meta( $current_user_id, 'resume', true );
+    $work_experience = get_user_meta( $current_user_id, 'work_experience', true );
+?>
 <!--login details start-->
 <div class="login-main-wrapper">
     <div class="login-container">
@@ -21,6 +30,50 @@
                 <!-- form start -->
                 <div class="repeater">
                     <div data-repeater-list="experience">
+                        
+                    <?php
+                    if ( ! empty( $work_experience ) && is_array( $work_experience ) && count( $work_experience ) >= 1 ) {
+                        foreach ( $work_experience as $key => $experience ) {
+							?>
+                        <div data-repeater-item>
+                            <div class="experience-fields">
+                                <div class="login-from">
+                                    <div class="personal-info">
+                                        <div class="form-group-left">
+                                            <div class="form-group form-error">
+                                                <label for="company"><?php echo esc_html__( 'Company Name', 'applicant-registration-system' ); ?></label>
+                                                <input type="text" placeholder="Company Name" id="company" name="company" class="form-control" value="<?php echo esc_html__( ! empty( $experience['company'] ) ? $experience['company'] : '', 'applicant-registration-system' ); ?>">
+                                            </div>
+                                            <div class="form-group form-error">
+                                                <label for="department"><?php echo esc_html__( 'Department', 'applicant-registration-system' ); ?></label>
+                                                <input type="text" placeholder="Department" id="department" name="department" class="form-control" value="<?php echo esc_html__( ! empty( $experience['department'] ) ? $experience['department'] : '', 'applicant-registration-system' ); ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group-right">
+                                        <div class="form-group form-error">
+                                            <label for="designation"><?php echo esc_html__( 'Designation', 'applicant-registration-system' ); ?></label>
+                                            <input type="text" placeholder="Designation" id="designation" name="designation" class="form-control" value="<?php echo esc_html__( ! empty( $experience['designation'] ) ? $experience['designation'] : '', 'applicant-registration-system' ); ?>">
+                                        </div>
+                                        <div class="form-group form-error">
+                                            <label for="work preiod"><?php echo esc_html__( 'Work Period', 'applicant-registration-system' ); ?></label><br>
+                                            <div class="maxmini-section">
+                                                <input type="date" name="work_period_min" placeholder="dd-mm-yyyy" value="<?php echo esc_html__( ! empty( $experience['work_period_min'] ) ? $experience['work_period_min'] : '', 'applicant-registration-system' ); ?>">
+                                                <div class="line"></div>
+                                                <input type="date" name="work_period_max" placeholder="dd-mm-yyyy" value="<?php echo esc_html__( ! empty( $experience['work_period_max'] ) ? $experience['work_period_max'] : '', 'applicant-registration-system' ); ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-submit">
+                                <button data-repeater-delete type="button" class="btn-submit"><?php echo esc_html__( 'Remove', 'applicant-registration-system' ); ?></button>
+                            </div> 
+                        </div>
+							<?php
+                        }
+					} else {
+						?>
                         <div data-repeater-item>
                             <div class="experience-fields">
                                 <div class="login-from">
@@ -56,6 +109,7 @@
                                 <button data-repeater-delete type="button" class="btn-submit"><?php echo esc_html__( 'Remove', 'applicant-registration-system' ); ?></button>
                             </div> 
                         </div>
+                        <?php } ?>
                     </div>
                 </div>
                 
@@ -68,30 +122,54 @@
                     <div class="form-group form-error">
                         <div class="social-link">
                             <p><?php echo esc_html__( 'Connect Your Facebook', 'applicant-registration-system' ); ?></p>
-                            <a href="#" type="button" class="btn btn-connect"><?php echo esc_html__( 'Connect', 'applicant-registration-system' ); ?></a>
+                            <?php
+							if ( ! empty( $facebook ) ) {
+								?>
+                                <a href="#" type="button" class="btn btn-connect"><?php echo esc_html__( 'Connected', 'applicant-registration-system' ); ?></a>
+                            <?php } else { ?>
+                                <a href="#" type="button" class="btn btn-connect"><?php echo esc_html__( 'Connect', 'applicant-registration-system' ); ?></a>
+                            <?php } ?>
                         </div>
-                        <input class="form-control d-none" type="text" name="facebook" placeholder="<?php echo esc_html__( 'Your Facebook Profile Link', 'applicant-registration-system' ); ?>">
+                        <input class="form-control d-none" type="text" name="facebook" placeholder="<?php echo esc_html__( 'Your Facebook Profile Link', 'applicant-registration-system' ); ?>"value="<?php echo esc_attr( ! empty( $facebook ) ? $facebook : '' ); ?>">
                     </div>
                     <div class="form-group form-error">
                         <div class="social-link">
                             <p><?php echo esc_html__( 'Connect Your LinkedIn', 'applicant-registration-system' ); ?></p>
-                            <a href="#" type="button" class="btn btn-connect"><?php echo esc_html__( 'Connect', 'applicant-registration-system' ); ?></a>
+                            <?php
+							if ( ! empty( $linkedin ) ) {
+								?>
+                                <a href="#" type="button" class="btn btn-connect"><?php echo esc_html__( 'Connected', 'applicant-registration-system' ); ?></a>
+                            <?php } else { ?>
+                                <a href="#" type="button" class="btn btn-connect"><?php echo esc_html__( 'Connect', 'applicant-registration-system' ); ?></a>
+                            <?php } ?>
                         </div>
-                        <input class="form-control d-none" type="text" name="linkedin" placeholder="<?php echo esc_html__( 'Your Linkedin Profile Link', 'applicant-registration-system' ); ?>">
+                        <input class="form-control d-none" type="text" name="linkedin" placeholder="<?php echo esc_html__( 'Your Linkedin Profile Link', 'applicant-registration-system' ); ?>" value="<?php echo esc_attr( ! empty( $linkedin ) ? $linkedin : '' ); ?>">
                     </div>
                     <div class="form-group form-error">
                         <div class="social-link">
                             <p><?php echo esc_html__( 'Connect Your Instagram', 'applicant-registration-system' ); ?></p>
-                            <a href="#" type="button" class="btn btn-connect"><?php echo esc_html__( 'Connect', 'applicant-registration-system' ); ?></a>
+                            <?php
+							if ( ! empty( $instagram ) ) {
+								?>
+                                <a href="#" type="button" class="btn btn-connect"><?php echo esc_html__( 'Connected', 'applicant-registration-system' ); ?></a>
+                            <?php } else { ?>
+                                <a href="#" type="button" class="btn btn-connect"><?php echo esc_html__( 'Connect', 'applicant-registration-system' ); ?></a>
+                            <?php } ?>
                         </div>
-                        <input class="form-control d-none" type="text" name="instagram" placeholder="<?php echo esc_html__( 'Your Instagram Profile Link', 'applicant-registration-system' ); ?>">
+                        <input class="form-control d-none" type="text" name="instagram" placeholder="<?php echo esc_html__( 'Your Instagram Profile Link', 'applicant-registration-system' ); ?>" value="<?php echo esc_attr( ! empty( $instagram ) ? $instagram : '' ); ?>">
                     </div>
                     <div class="form-group form-error">
                         <div class="social-link">
                             <p><?php echo esc_html__( 'Connect Your Twitter', 'applicant-registration-system' ); ?></p>
-                            <a href="#" type="button" class="btn btn-connect"><?php echo esc_html__( 'Connect', 'applicant-registration-system' ); ?></a>
+                            <?php
+							if ( ! empty( $twitter ) ) {
+								?>
+                                <a href="#" type="button" class="btn btn-connect"><?php echo esc_html__( 'Connected', 'applicant-registration-system' ); ?></a>
+                            <?php } else { ?>
+                                <a href="#" type="button" class="btn btn-connect"><?php echo esc_html__( 'Connect', 'applicant-registration-system' ); ?></a>
+                            <?php } ?>
                         </div>
-                        <input class="form-control d-none" type="text" name="twitter" placeholder="<?php echo esc_html__( 'Your Twitter Profile Link', 'applicant-registration-system' ); ?>">
+                        <input class="form-control d-none" type="text" name="twitter" placeholder="<?php echo esc_html__( 'Your Twitter Profile Link', 'applicant-registration-system' ); ?>" value="<?php echo esc_attr( ! empty( $twitter ) ? $twitter : '' ); ?>">
                     </div>
                 </div>
                 <!--Social part end-->
@@ -103,7 +181,7 @@
                 <!--attach file start-->
                 <div class="attach-file-section">
                     <div id="image-container" class="upload-container">
-                        <input type="hidden" id="resume_id" name="resume" value="">
+                        <input type="hidden" id="resume_id" name="resume" value="<?php echo esc_html( ! empty( $resume ) ? $resume : '' ); ?>">
                         <!-- <input type="hidden" id="resume_url" name="product_thumbnail_url" value=""> -->
                         <label id="upload-resume-file" for="resume" class="upload-file">
                             <span>
@@ -113,6 +191,31 @@
                             </span>
                         </label>
                     </div>
+                    <?php
+                    if ( ! empty( $resume ) ) {
+						$file = get_attached_file( $resume );
+						$attachment_url = wp_get_attachment_url( $resume );
+
+						$file_size = false;
+
+						if ( isset( $meta['filesize'] ) ) {
+							$file_size = $meta['filesize'];
+						} elseif ( file_exists( $file ) ) {
+							$file_size = wp_filesize( $file );
+						}
+						if ( ! empty( $attachment_url ) ) {
+							?>
+                    <div id="uploaded-resume" class="resume-updated">
+                        <p><?php echo esc_html( wp_basename( $file ) ); ?>  <span><?php echo size_format( $file_size ); ?></span></p>
+                        <div class="resume-delete">
+                            <p><img src="<?php echo get_theme_file_uri(); ?>/assets/images/icons/check-circle.svg" alt=""><?php echo esc_html__( 'Completed', 'applicant-registration-system' ); ?></p>
+                            <img src="<?php echo get_theme_file_uri(); ?>/assets/images/icons/trash.svg" alt="">
+                        </div>
+                    </div>
+							<?php
+                        }
+					} else {
+						?>
                     <div id="uploaded-resume" class="resume-updated" style="display: none;">
                         <p id="uploaded-resume-title"><?php echo esc_html__( 'Resume.pdf', 'applicant-registration-system' ); ?> <span><?php echo esc_html__( '1.2MB', 'applicant-registration-system' ); ?></span></p>
                         <div class="resume-delete">
@@ -120,6 +223,7 @@
                             <a href="#" id="remove-resume"><img src="<?php echo get_theme_file_uri(); ?>/assets/images/icons/trash.svg" alt=""></a>
                         </div>
                     </div>
+                    <?php } ?>
                 </div>
                 <!--attach file end-->
                 <!--Upload apart end-->
@@ -129,7 +233,11 @@
             <input type="hidden" name="action" value="bex_work_exp">
 
             <div class="form-submit">
-                <a href="#" class="btn-submit btn-back"><img src="<?php echo get_theme_file_uri(); ?>/assets/images/icons/chevron-left.svg"alt="Icon" class="fluid"><?php echo esc_html__( 'Go back', 'applicant-registration-system' ); ?></a>
+                <?php
+                    global $wp;
+                    $prev_url = home_url( $wp->request ) . '?step=your-job-requirement';
+                ?>
+                <a href="<?php echo esc_url( $prev_url ); ?>" class="btn-submit btn-back"><img src="<?php echo get_theme_file_uri(); ?>/assets/images/icons/chevron-left.svg"alt="Icon" class="fluid"><?php echo esc_html__( 'Go back', 'applicant-registration-system' ); ?></a>
                 <button type="submit" class="btn-submit"><?php echo esc_html__( 'Next Step', 'applicant-registration-system' ); ?><img src="<?php echo get_theme_file_uri(); ?>/assets/images/icons/chevron-right.svg"alt="Icon" class="fluid"></button>  
             </div>
         </form>

@@ -143,7 +143,14 @@
                     <!-- group start -->
                     <div class="info-group">
                         <h6><?php echo esc_html__( 'What Kind of job would you like to have?', 'applicant-registration-system' ); ?></h6>
-                        <p><?php echo $job_type; ?></p>
+                        <p>
+                        <?php
+						if ( ! empty( $job_type ) ) {
+							$job_term = get_term_by( 'id', $job_type, 'job_listing_type' );
+                            echo $job_term->name;
+						}
+                        ?>
+                        </p>
                     </div>
                     <!-- group end -->
                     <!-- group start -->
@@ -326,7 +333,11 @@
             <!-- connect social media box end -->
         </div>
         <div class="form-submit">
-            <button type="submit" class="btn btn-back btn-edit"><img src="<?php echo get_theme_file_uri(); ?>/assets/images/icons/pencil-alt.svg" alt=""><?php echo esc_html__( 'Edit Information', 'applicant-registration-system' ); ?></button>
+            <?php
+                global $wp;
+                $prev_url = home_url( $wp->request ) . '?step=personal-information';
+            ?>
+            <a href="<?php echo esc_url( $prev_url ); ?>" class="btn btn-back btn-edit"><img src="<?php echo get_theme_file_uri(); ?>/assets/images/icons/pencil-alt.svg" alt=""><?php echo esc_html__( 'Edit Information', 'applicant-registration-system' ); ?></a>
             <button  type="submit" class="btn-submit"><?php echo esc_html__( 'Complete', 'applicant-registration-system' ); ?><img src="<?php echo get_theme_file_uri(); ?>/assets/images/icons/check-circle-two.svg" alt=""></button>  
         </div>
     </div>
