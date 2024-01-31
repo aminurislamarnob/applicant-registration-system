@@ -234,7 +234,6 @@ class UserRegistration {
     }
 
 	public function wp_job_manager_applicant_registration() {
-
 		ob_start();
 		$current_step = isset( $_GET['step'] ) ? $_GET['step'] : 'user-registration';
 		if ( 'user-registration' === $current_step ) {

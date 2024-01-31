@@ -41,7 +41,6 @@ class Assets {
         wp_register_script( 'applicant_registration_system_admin_script', $admin_script, [], APPLICANT_REGISTRATION_SYSTEM_PLUGIN_VERSION, true );
         wp_register_script( 'jquery_repeater', $jquery_repeater_script, [ 'jquery' ], APPLICANT_REGISTRATION_SYSTEM_PLUGIN_VERSION, true );
         wp_register_script( 'applicant_registration_system_script', $frontend_script, [ 'jquery', 'jquery_repeater' ], APPLICANT_REGISTRATION_SYSTEM_PLUGIN_VERSION, true );
-        wp_enqueue_media();
     }
 
     /**
@@ -75,6 +74,11 @@ class Assets {
      * @return void
      */
     public function enqueue_front_scripts() {
+        global $post;
+        if ( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'wp_job_manager_applicant_registration' ) ) {
+            wp_enqueue_media();
+        }
+
         wp_enqueue_style( 'applicant_registration_system_style' );
         wp_enqueue_script( 'applicant_registration_system_script' );
         wp_enqueue_script( 'jquery_repeater' );

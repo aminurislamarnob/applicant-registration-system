@@ -206,10 +206,10 @@
 						if ( ! empty( $attachment_url ) ) {
 							?>
                     <div id="uploaded-resume" class="resume-updated">
-                        <p><?php echo esc_html( wp_basename( $file ) ); ?>  <span><?php echo size_format( $file_size ); ?></span></p>
+                        <p id="uploaded-resume-title"><?php echo esc_html( wp_basename( $file ) ); ?>  <span><?php echo size_format( $file_size ); ?></span></p>
                         <div class="resume-delete">
                             <p><img src="<?php echo get_theme_file_uri(); ?>/assets/images/icons/check-circle.svg" alt=""><?php echo esc_html__( 'Completed', 'applicant-registration-system' ); ?></p>
-                            <img src="<?php echo get_theme_file_uri(); ?>/assets/images/icons/trash.svg" alt="">
+                            <a href="#" id="remove-resume"><img src="<?php echo get_theme_file_uri(); ?>/assets/images/icons/trash.svg" alt=""></a>
                         </div>
                     </div>
 							<?php
