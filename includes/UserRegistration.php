@@ -7,6 +7,9 @@ class UserRegistration {
      * The constructor.
      */
 	public function __construct() {
+        //hide wp admin bar
+        // add_filter( 'show_admin_bar', [ $this, 'hide_wordpress_admin_bar' ] );
+
 		// Register shortcode
 		add_shortcode( 'wp_job_manager_applicant_registration', [ $this, 'wp_job_manager_applicant_registration' ] );
 
@@ -29,6 +32,18 @@ class UserRegistration {
         add_action( 'wp_ajax_bex_work_exp', [ $this, 'handle_bex_work_exp_form_submission' ] );
         add_action( 'wp_ajax_nopriv_bex_work_exp', [ $this, 'handle_bex_work_exp_form_submission' ] );
 	}
+
+    /**
+     * Hide admin bar for all user role except 'administrator'
+     *
+     * @return void
+     */
+    public function hide_wordpress_admin_bar( $hide ) {
+        if ( ! current_user_can( 'administrator' ) || ! current_user_can( 'subscriber' ) ) {
+            return false;
+		}
+        return $hide;
+    }
 
     /**
      * Handle ajax form submission of user login info

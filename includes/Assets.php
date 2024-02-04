@@ -40,6 +40,7 @@ class Assets {
 
         wp_register_script( 'applicant_registration_system_admin_script', $admin_script, [], APPLICANT_REGISTRATION_SYSTEM_PLUGIN_VERSION, true );
         wp_register_script( 'jquery_repeater', $jquery_repeater_script, [ 'jquery' ], APPLICANT_REGISTRATION_SYSTEM_PLUGIN_VERSION, true );
+        wp_register_script( 'sweetalert_script', '//cdn.jsdelivr.net/npm/sweetalert2@11.10.4/dist/sweetalert2.all.min.js', [], '11.10.4', true );
         wp_register_script( 'applicant_registration_system_script', $frontend_script, [ 'jquery', 'jquery_repeater' ], APPLICANT_REGISTRATION_SYSTEM_PLUGIN_VERSION, true );
     }
 
@@ -53,6 +54,7 @@ class Assets {
         $frontend_style    = APPLICANT_REGISTRATION_SYSTEM_PLUGIN_ASSET . '/frontend/style.css';
 
         wp_register_style( 'applicant_registration_system_admin_style', $admin_style, [], filemtime( APPLICANT_REGISTRATION_SYSTEM_DIR . '/assets/admin/style.css' ) );
+        wp_register_style( 'sweetalert2_styles', '//cdn.jsdelivr.net/npm/sweetalert2@11.10.4/dist/sweetalert2.min.css', [], '11.10.4' );
         wp_register_style( 'applicant_registration_system_style', $frontend_style, [], filemtime( APPLICANT_REGISTRATION_SYSTEM_DIR . '/assets/frontend/style.css' ) );
     }
 
@@ -80,11 +82,15 @@ class Assets {
         }
 
         wp_enqueue_style( 'applicant_registration_system_style' );
+        wp_enqueue_style( 'sweetalert2_styles' );
         wp_enqueue_script( 'applicant_registration_system_script' );
         wp_enqueue_script( 'jquery_repeater' );
+        wp_enqueue_script( 'sweetalert_script' );
         wp_localize_script(
             'applicant_registration_system_script', 'ajax_data', [
                 'ajaxurl' => admin_url( 'admin-ajax.php' ),
+                'icon_url' => APPLICANT_REGISTRATION_SYSTEM_PLUGIN_ASSET . '/frontend/alert-icon.jpg',
+                'home_url' => get_home_url(),
             ]
         );
     }

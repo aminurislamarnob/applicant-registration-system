@@ -116,7 +116,11 @@
                     $prev_url = home_url( $wp->request ) . '?step=personal-information';
                 ?>
                 <a href="<?php echo esc_url( $prev_url ); ?>" class="btn-submit btn-back"><img src="<?php echo get_theme_file_uri(); ?>/assets/images/icons/chevron-left.svg"alt="Icon" class="fluid"><?php echo esc_html__( 'Go back', 'applicant-registration-system' ); ?></a>
-                <button type="submit" id="job_req_submit" class="btn-submit"><?php echo esc_html__( 'Next Step', 'applicant-registration-system' ); ?> <img src="<?php echo get_theme_file_uri(); ?>/assets/images/icons/chevron-right.svg"alt="Icon" class="fluid"></button>  
+                <button type="submit" id="job_req_submit" class="btn-submit">
+                    <span class="btn-text"><?php echo esc_attr__( 'Next Step', 'applicant-registration-system' ); ?> <img src="<?php echo get_theme_file_uri(); ?>/assets/images/icons/chevron-right.svg" alt="Icon" class="fluid">
+                    </span>
+                    <span class="spinner"></span>
+                </button>
             </div>
         </div>
     </form>

@@ -338,7 +338,7 @@
                 $prev_url = home_url( $wp->request ) . '?step=personal-information';
             ?>
             <a href="<?php echo esc_url( $prev_url ); ?>" class="btn btn-back btn-edit"><img src="<?php echo get_theme_file_uri(); ?>/assets/images/icons/pencil-alt.svg" alt=""><?php echo esc_html__( 'Edit Information', 'applicant-registration-system' ); ?></a>
-            <button  type="submit" class="btn-submit"><?php echo esc_html__( 'Complete', 'applicant-registration-system' ); ?><img src="<?php echo get_theme_file_uri(); ?>/assets/images/icons/check-circle-two.svg" alt=""></button>  
+            <button  type="submit" class="btn-submit" id="complete-btn"><?php echo esc_html__( 'Complete', 'applicant-registration-system' ); ?><img src="<?php echo get_theme_file_uri(); ?>/assets/images/icons/check-circle-two.svg" alt=""></button>  
         </div>
     </div>
 </div>

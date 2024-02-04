@@ -33,19 +33,25 @@ $(document).ready( function() {
           dataType : "json",
           url : ajax_data.ajaxurl,
           data : submitted_data,
-          success: function(response) {
-            if(response.type == "error") {
-                // Clear existing error messages
-                clearErrorMessages();
+            beforeSend: function() {
+                $("#bex-register").addClass('loading');
+            },
+            success: function(response) {
+                if(response.type == "error") {
+                    // Clear existing error messages
+                    clearErrorMessages();
 
-                // Loop through the error messages
-                $.each(response.errors, function(fieldName, errorMessage) {
-                    displayError(fieldName, errorMessage);
-                });
-            }else if(response.type == "success"){
-                window.location.href = window.location.href + '?step=personal-information';
-            }
-          }
+                    // Loop through the error messages
+                    $.each(response.errors, function(fieldName, errorMessage) {
+                        displayError(fieldName, errorMessage);
+                    });
+                }else if(response.type == "success"){
+                    window.location.href = window.location.href.split('?')[0] + '?step=personal-information';
+                }
+            },
+            complete: function() {
+                $("#bex-register").removeClass('loading');
+            },
        })
     });
 
@@ -78,6 +84,9 @@ $(document).ready( function() {
            dataType : "json",
            url : ajax_data.ajaxurl,
            data : submitted_data,
+           beforeSend: function() {
+                $("#bex-personal-info-submit").addClass('loading');
+            },
            success: function(response) {
              if(response.type == "error") {
                  // Clear existing error messages
@@ -90,7 +99,10 @@ $(document).ready( function() {
              }else if(response.type == "success"){
                 window.location.href = window.location.href.split('?')[0] + '?step=your-job-requirement';
              }
-           }
+           },
+           complete: function() {
+               $("#bex-personal-info-submit").removeClass('loading');
+           },
         })
     });
 
@@ -117,6 +129,9 @@ $(document).ready( function() {
            dataType : "json",
            url : ajax_data.ajaxurl,
            data : submitted_data,
+           beforeSend: function() {
+                $("#job_req_submit").addClass('loading');
+            },
            success: function(response) {
              if(response.type == "error") {
                  // Clear existing error messages
@@ -129,6 +144,9 @@ $(document).ready( function() {
              }else if(response.type == "success"){
                 window.location.href = window.location.href.split('?')[0] + '?step=work-experience';
              }
+           },
+           complete: function() {
+               $("#job_req_submit").removeClass('loading');
            }
         })
     }));
@@ -182,6 +200,9 @@ $(document).ready( function() {
            dataType : "json",
            url : ajax_data.ajaxurl,
            data : submitted_data,
+           beforeSend: function() {
+                $("#work-exp-form-btn").addClass('loading');
+            },
            success: function(response) {
              if(response.type == "error") {
                  // Clear existing error messages
@@ -194,6 +215,9 @@ $(document).ready( function() {
              }else if(response.type == "success"){
                 window.location.href = window.location.href.split('?')[0] + '?step=check-and-send';
              }
+           },
+           complete: function() {
+               $("#work-exp-form-btn").removeClass('loading');
            }
         })
     }));
@@ -288,6 +312,25 @@ $(document).ready( function() {
     //     }
     // });
 
+    //confirm button handle
+    $('#complete-btn').click(function(event){
+        event.preventDefault();
+        Swal.fire({
+            title: "Congratulations",
+            text: "Your profile is ready and set",
+            imageUrl: ajax_data.icon_url,
+            imageWidth: 370,
+            // imageHeight: 200,
+            showCancelButton: true,
+            confirmButtonColor: "#276CF4",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Confirm"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location = ajax_data.home_url
+            }
+        });
+    });
  });
 
  $(document).ready(function () {

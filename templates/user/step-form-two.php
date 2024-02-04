@@ -101,7 +101,12 @@
                             $prev_url = home_url( $wp->request ) . '?step=user-registration';
                         ?>
                         <a class="btn-submit btn-back" href="<?php echo esc_url( $prev_url ); ?>"><img src="<?php echo get_theme_file_uri(); ?>/assets/images/icons/chevron-left.svg"alt="Icon" class="fluid"><?php echo esc_attr__( 'Go back', 'applicant-registration-system' ); ?></a>
-                        <button type="submit" id="bex-personal-info-submit" class="btn-submit">Next Step <img src="<?php echo get_theme_file_uri(); ?>/assets/images/icons/chevron-right.svg"alt="Icon" class="fluid"></button>  
+                        
+                        <button type="submit" id="bex-personal-info-submit" class="btn-submit">
+                            <span class="btn-text"><?php echo esc_attr__( 'Next Step', 'applicant-registration-system' ); ?> <img src="<?php echo get_theme_file_uri(); ?>/assets/images/icons/chevron-right.svg" alt="Icon" class="fluid">
+                            </span>
+                            <span class="spinner"></span>
+                        </button>
                     </div>
                 </div>
             </form>

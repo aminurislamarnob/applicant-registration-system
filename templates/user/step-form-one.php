@@ -46,7 +46,11 @@ if ( is_user_logged_in() ) {
                         <input type="hidden" name="nonce" value="<?php echo wp_create_nonce( 'registration_login_details' ); ?>">
 
                         <?php if ( ! is_user_logged_in() ) : ?>
-                            <button id="bex-register" type="submit" class="btn-submit"><?php echo esc_attr__( 'Next Step', 'applicant-registration-system' ); ?> <img src="<?php echo get_theme_file_uri(); ?>/assets/images/icons/chevron-right.svg" alt="Icon" class="fluid"></button>
+                            <button id="bex-register" type="submit" class="btn-submit">
+                                <span class="btn-text"><?php echo esc_attr__( 'Next Step', 'applicant-registration-system' ); ?> <img src="<?php echo get_theme_file_uri(); ?>/assets/images/icons/chevron-right.svg" alt="Icon" class="fluid">
+                                </span>
+                                <span class="spinner"></span>
+                            </button>
 							<?php
                         else :
                             global $wp;
