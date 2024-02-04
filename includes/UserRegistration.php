@@ -8,7 +8,9 @@ class UserRegistration {
      */
 	public function __construct() {
         //hide wp admin bar
-        // add_filter( 'show_admin_bar', [ $this, 'hide_wordpress_admin_bar' ] );
+        add_filter( 'show_admin_bar', [ $this, 'hide_wordpress_admin_bar' ] );
+        add_filter( 'login_form_middle', [ $this, 'add_content_login_form_middle' ] );
+        add_filter( 'template_redirect', [ $this, 'bex_login_redirect' ] );
 
 		// Register shortcode
 		add_shortcode( 'wp_job_manager_applicant_registration', [ $this, 'wp_job_manager_applicant_registration' ] );
@@ -44,6 +46,27 @@ class UserRegistration {
 		}
         return $hide;
     }
+
+    	/**
+     * Add content forgot password link on login form middle
+     *
+     * @return void
+     */
+	public function add_content_login_form_middle() {
+		return '<div class="password-lost-container"><a href="#">Forgot Password</a></div>';
+	}
+
+    	/**
+     * If loggedin user try to check login page then redirect to home page
+     *
+     * @return void
+     */
+	public function bex_login_redirect() {
+		if ( is_user_logged_in() && is_page( 'login' ) ) {
+			wp_redirect( home_url( '/' ) );
+			exit();
+		}
+	}
 
     /**
      * Handle ajax form submission of user login info
